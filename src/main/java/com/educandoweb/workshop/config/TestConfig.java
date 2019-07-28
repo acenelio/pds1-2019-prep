@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.workshop.entities.Category;
 import com.educandoweb.workshop.entities.Product;
+import com.educandoweb.workshop.entities.User;
 import com.educandoweb.workshop.repositories.CategoryRepository;
 import com.educandoweb.workshop.repositories.ProductRepository;
+import com.educandoweb.workshop.repositories.UserRepository;
 
 @Configuration
 @Profile("test")
@@ -21,6 +23,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -35,7 +40,11 @@ public class TestConfig implements CommandLineRunner {
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "", cat3);
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "", cat2);
 				
+		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
+		User u2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456");
+		
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		userRepository.saveAll(Arrays.asList(u1, u2));
 	}
 }
