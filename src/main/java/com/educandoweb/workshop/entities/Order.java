@@ -1,7 +1,7 @@
 package com.educandoweb.workshop.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +24,7 @@ public class Order implements Serializable {
 	private Long id;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="GMT")
-	private Date moment;
+	private Instant moment;
 	private Integer orderStatus;
 
 	@ManyToOne
@@ -34,7 +34,7 @@ public class Order implements Serializable {
 	public Order() {
 	}
 
-	public Order(Long id, Date moment, OrderStatus orderStatus, User client) {
+	public Order(Long id, Instant moment, OrderStatus orderStatus, User client) {
 		super();
 		this.id = id;
 		this.moment = moment;
@@ -50,11 +50,11 @@ public class Order implements Serializable {
 		this.id = id;
 	}
 
-	public Date getMoment() {
+	public Instant getMoment() {
 		return moment;
 	}
 
-	public void setMoment(Date moment) {
+	public void setMoment(Instant moment) {
 		this.moment = moment;
 	}
 
