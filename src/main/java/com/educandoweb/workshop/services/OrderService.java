@@ -1,26 +1,20 @@
 package com.educandoweb.workshop.services;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import com.educandoweb.workshop.entities.Order;
 import com.educandoweb.workshop.repositories.OrderRepository;
 
 @Service
-public class OrderService {
+public class OrderService implements CRUDService<Order, Long> {
 
 	@Autowired
 	private OrderRepository repository;
-	
-	public List<Order> findAll() {
-		return repository.findAll();
-	}
-	
-	public Order findById(Long id) {
-		Optional<Order> result = repository.findById(id);
-		return result.get();
+
+	@Override
+	public JpaRepository<Order, Long> getRepository() {
+		return repository;
 	}
 }

@@ -1,33 +1,22 @@
 package com.educandoweb.workshop.resources;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.educandoweb.workshop.entities.Order;
+import com.educandoweb.workshop.services.CRUDService;
 import com.educandoweb.workshop.services.OrderService;
 
 @RestController
 @RequestMapping(value="/orders")
-public class OrderResource {
+public class OrderResource implements CRUDResource<Order, Long> {
 
 	@Autowired
 	private OrderService service;
-	
-	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Order>> findAll() {
-		var list = service.findAll();
-		return ResponseEntity.ok().body(list);
-	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Order> findById(@PathVariable Long id) {
-		var obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+
+	@Override
+	public CRUDService<Order, Long> getService() {
+		return service;
 	}
 }
