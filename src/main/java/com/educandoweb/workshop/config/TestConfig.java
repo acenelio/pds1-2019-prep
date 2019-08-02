@@ -18,7 +18,6 @@ import com.educandoweb.workshop.entities.enums.OrderStatus;
 import com.educandoweb.workshop.repositories.CategoryRepository;
 import com.educandoweb.workshop.repositories.OrderItemRepository;
 import com.educandoweb.workshop.repositories.OrderRepository;
-import com.educandoweb.workshop.repositories.PaymentRepository;
 import com.educandoweb.workshop.repositories.ProductRepository;
 import com.educandoweb.workshop.repositories.UserRepository;
 
@@ -37,9 +36,6 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private OrderRepository orderRepository;
-	
-	@Autowired
-	private PaymentRepository paymentRepository;
 	
 	@Autowired
 	private OrderItemRepository orderItemRepository;
@@ -80,6 +76,9 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi2 = new OrderItem(o1, p4, 1, p4.getPrice());
 		OrderItem oi3 = new OrderItem(o2, p3, 2, p1.getPrice());
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+				
+		userRepository.saveAll(Arrays.asList(u1, u2));
+		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		
 		o1.getItems().add(oi1);
 		o1.getItems().add(oi2);
@@ -88,12 +87,11 @@ public class TestConfig implements CommandLineRunner {
 		
 		o3.getItems().add(oi4);
 		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
 		Payment pay1 = new Payment(null, Instant.parse("2019-06-23T13:02:55Z"), o1);
 		o1.setPayment(pay1);
 
-		userRepository.saveAll(Arrays.asList(u1, u2));
-		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
-		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
-		paymentRepository.saveAll(Arrays.asList(pay1));
+		orderRepository.save(o1);
 	}
 }
