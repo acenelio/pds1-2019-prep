@@ -1,5 +1,6 @@
 package com.educandoweb.workshop.entities;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,8 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -27,6 +31,12 @@ public class Product implements DomainEntity<Long> {
 	private String description;
 	private Double price;
 	private String imgUrl;
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="GMT")
+	private Instant createdAt;
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="GMT")
+	private Instant updatedAt;
 
 	@ManyToMany
 	@JoinTable(name = "tb_product_category",
@@ -106,6 +116,26 @@ public class Product implements DomainEntity<Long> {
 		return categories;
 	}
 
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
+
+	public Instant getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@PreUpdate
+    public void preUpdate() {
+        updatedAt = Instant.now();
+    }
+    
+    @PrePersist
+    public void prePersist() {
+        Instant now = Instant.now();
+        updatedAt = now;
+        createdAt = now;
+    }
+    
 	@Override
 	public int hashCode() {
 		final int prime = 31;
