@@ -27,8 +27,8 @@ public interface CRUDService<E extends DomainEntity<ID>, ID> {
 		return getRepository().save(obj);
 	}
 	
-	default E update(E obj) {
-		E newObj = findById(obj.getId());
+	default E update(ID id, E obj) {
+		E newObj = findById(id);
 		updateData(newObj, obj);
 		return getRepository().save(newObj);
 	}
