@@ -1,6 +1,5 @@
 package com.educandoweb.workshop.entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements Serializable {
+public class User implements DomainEntity<Long> {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -44,10 +43,12 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

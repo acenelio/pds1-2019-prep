@@ -1,6 +1,5 @@
 package com.educandoweb.workshop.entities;
 
-import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.Entity;
@@ -16,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_payment")
-public class Payment implements Serializable {
+public class Payment implements DomainEntity<Long> {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -41,10 +40,12 @@ public class Payment implements Serializable {
 		this.order = order;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

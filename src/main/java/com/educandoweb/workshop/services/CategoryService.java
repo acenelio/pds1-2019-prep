@@ -17,4 +17,9 @@ public class CategoryService implements CRUDService<Category, Long> {
 	public JpaRepository<Category, Long> getRepository() {
 		return repository;
 	}
+
+	@Override
+	public void updateData(Category newObj, Category obj) {
+		newObj.setName(obj.getName());
+	}
 }

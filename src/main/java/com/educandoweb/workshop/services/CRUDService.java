@@ -1,14 +1,15 @@
 package com.educandoweb.workshop.services;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import com.educandoweb.workshop.entities.DomainEntity;
+
 @Service
-public interface CRUDService<E extends Serializable, ID> {
+public interface CRUDService<E extends DomainEntity<ID>, ID> {
 
 	JpaRepository<E, ID> getRepository();
 	
@@ -20,4 +21,21 @@ public interface CRUDService<E extends Serializable, ID> {
 		Optional<E> result = getRepository().findById(id);
 		return result.get();
 	}
+	
+	default E insert(E obj) {
+		obj.setId(null);
+		return getRepository().save(obj);
+	}
+	
+	default E update(E obj) {
+		E newObj = findById(obj.getId());
+		updateData(newObj, obj);
+		return getRepository().save(newObj);
+	}
+	
+	default void delete(ID id) {
+		getRepository().deleteById(id);
+	}
+	
+	void updateData(E newObj, E obj);
 }

@@ -16,5 +16,13 @@ public class ProductService implements CRUDService<Product, Long> {
 	@Override
 	public JpaRepository<Product, Long> getRepository() {
 		return repository;
+	}
+
+	@Override
+	public void updateData(Product newObj, Product obj) {
+		newObj.setName(obj.getName());
+		newObj.setDescription(obj.getDescription());
+		newObj.setImgUrl(obj.getImgUrl());
+		newObj.setPrice(obj.getPrice());
 	}	
 }

@@ -1,6 +1,5 @@
 package com.educandoweb.workshop.resources;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -8,9 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.educandoweb.workshop.entities.DomainEntity;
 import com.educandoweb.workshop.services.CRUDService;
 
-public interface CRUDResource<E extends Serializable, ID> {
+public interface CRUDResource<E extends DomainEntity<ID>, ID> {
 	
 	CRUDService<E, ID> getService();
 	

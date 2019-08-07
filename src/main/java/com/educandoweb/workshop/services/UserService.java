@@ -17,4 +17,11 @@ public class UserService implements CRUDService<User, Long> {
 	public JpaRepository<User, Long> getRepository() {
 		return repository;
 	}
+
+	@Override
+	public void updateData(User newObj, User obj) {
+		newObj.setName(obj.getEmail());
+		newObj.setEmail(obj.getEmail());
+		newObj.setPhone(obj.getPhone());
+	}
 }

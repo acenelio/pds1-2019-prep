@@ -17,4 +17,8 @@ public class PaymentService implements CRUDService<Payment, Long> {
 	public JpaRepository<Payment, Long> getRepository() {
 		return repository;
 	}
+
+	@Override
+	public void updateData(Payment newObj, Payment obj) {
+	}
 }

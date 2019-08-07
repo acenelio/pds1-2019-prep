@@ -1,6 +1,5 @@
 package com.educandoweb.workshop.entities;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable {
+public class Order implements  DomainEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -53,10 +52,12 @@ public class Order implements Serializable {
 		this.client = client;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

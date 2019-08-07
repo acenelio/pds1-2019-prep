@@ -17,4 +17,9 @@ public class OrderService implements CRUDService<Order, Long> {
 	public JpaRepository<Order, Long> getRepository() {
 		return repository;
 	}
+
+	@Override
+	public void updateData(Order newObj, Order obj) {
+		newObj.setOrderStatus(obj.getOrderStatus());
+	}
 }
