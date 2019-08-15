@@ -10,12 +10,13 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.educandoweb.workshop.dto.PaymentDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_payment")
-public class Payment implements DomainEntity<Long> {
+public class Payment implements DomainEntity<Long, PaymentDTO> {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -89,5 +90,10 @@ public class Payment implements DomainEntity<Long> {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public PaymentDTO toDTO() {
+		return new PaymentDTO(this);
 	}
 }

@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import com.educandoweb.workshop.dto.OrderDTO;
 import com.educandoweb.workshop.entities.Order;
 import com.educandoweb.workshop.repositories.OrderRepository;
+import com.educandoweb.workshop.services.generics.CreateService;
+import com.educandoweb.workshop.services.generics.RetrieveService;
 
 @Service
-public class OrderService implements CRUDService<Order, Long> {
+public class OrderService implements CreateService<Order, OrderDTO, Long>, RetrieveService<Order, OrderDTO, Long> {
 
 	@Autowired
 	private OrderRepository repository;
@@ -16,10 +19,5 @@ public class OrderService implements CRUDService<Order, Long> {
 	@Override
 	public JpaRepository<Order, Long> getRepository() {
 		return repository;
-	}
-
-	@Override
-	public void updateData(Order newObj, Order obj) {
-		newObj.setOrderStatus(obj.getOrderStatus());
 	}
 }

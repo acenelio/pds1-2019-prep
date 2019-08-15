@@ -10,11 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.educandoweb.workshop.dto.UserDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_user")
-public class User implements DomainEntity<Long> {
+public class User implements DomainEntity<Long, UserDTO> {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -112,5 +113,10 @@ public class User implements DomainEntity<Long> {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public UserDTO toDTO() {
+		return new UserDTO(this);
 	}
 }

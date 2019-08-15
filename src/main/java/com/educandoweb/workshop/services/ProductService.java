@@ -2,13 +2,13 @@ package com.educandoweb.workshop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
 
+import com.educandoweb.workshop.dto.ProductDTO;
 import com.educandoweb.workshop.entities.Product;
 import com.educandoweb.workshop.repositories.ProductRepository;
+import com.educandoweb.workshop.services.generics.CRUDService;
 
-@Service
-public class ProductService implements CRUDService<Product, Long> {
+public class ProductService implements CRUDService<Product, ProductDTO, Long> {
 
 	@Autowired
 	private ProductRepository repository;
@@ -19,10 +19,10 @@ public class ProductService implements CRUDService<Product, Long> {
 	}
 
 	@Override
-	public void updateData(Product newObj, Product obj) {
-		newObj.setName(obj.getName());
-		newObj.setDescription(obj.getDescription());
-		newObj.setImgUrl(obj.getImgUrl());
-		newObj.setPrice(obj.getPrice());
+	public void updateData(Product entity, ProductDTO dto) {
+		entity.setName(dto.getName());
+		entity.setDescription(dto.getDescription());
+		entity.setImgUrl(dto.getImgUrl());
+		entity.setPrice(dto.getPrice());
 	}	
 }

@@ -15,12 +15,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.educandoweb.workshop.dto.OrderDTO;
 import com.educandoweb.workshop.entities.enums.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "tb_order")
-public class Order implements  DomainEntity<Long> {
+public class Order implements  DomainEntity<Long, OrderDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -132,5 +133,10 @@ public class Order implements  DomainEntity<Long> {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public OrderDTO toDTO() {
+		return new OrderDTO(this);
 	}
 }

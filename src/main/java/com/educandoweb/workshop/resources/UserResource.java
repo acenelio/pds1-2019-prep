@@ -4,19 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.educandoweb.workshop.dto.UserDTO;
 import com.educandoweb.workshop.entities.User;
-import com.educandoweb.workshop.services.CRUDService;
-import com.educandoweb.workshop.services.UserService;
+import com.educandoweb.workshop.resources.generics.CRUDResource;
+import com.educandoweb.workshop.services.generics.CRUDService;
 
 @RestController
 @RequestMapping(value="/users")
-public class UserResource implements CRUDResource<User, Long> {
+public class UserResource implements CRUDResource<User, UserDTO, Long> {
 
 	@Autowired
-	private UserService service;
-
+	private CRUDService<User, UserDTO, Long> service;
+	
 	@Override
-	public CRUDService<User, Long> getService() {
+	public CRUDService<User, UserDTO, Long> getService() {
 		return service;
 	}
 }

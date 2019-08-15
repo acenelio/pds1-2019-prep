@@ -13,11 +13,12 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.educandoweb.workshop.dto.CategoryDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_category")
-public class Category implements DomainEntity<Long> {
+public class Category implements DomainEntity<Long, CategoryDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -109,5 +110,11 @@ public class Category implements DomainEntity<Long> {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public CategoryDTO toDTO() {
+		return new CategoryDTO(this);
 	}
 }

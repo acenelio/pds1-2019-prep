@@ -13,11 +13,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.educandoweb.workshop.dto.ProductDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_product")
-public class Product implements DomainEntity<Long> {
+public class Product implements DomainEntity<Long, ProductDTO> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -128,5 +129,10 @@ public class Product implements DomainEntity<Long> {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public ProductDTO toDTO() {
+		return new ProductDTO(this);
 	}
 }
