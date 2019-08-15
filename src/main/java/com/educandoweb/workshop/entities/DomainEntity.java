@@ -5,9 +5,7 @@ import java.io.Serializable;
 public interface DomainEntity<ID, D> extends Serializable {
 
 	ID getId();
-	
-	void setId(ID id);
-	
+
 	D toDTO();
 	
 	void updateDataFromDTO(D dto);

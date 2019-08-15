@@ -2,9 +2,10 @@ package com.educandoweb.workshop.dto;
 
 import com.educandoweb.workshop.entities.User;
 
-public class UserDTO implements DTO<User> {
+public class UserDTO implements DTO<User, Long> {
 	private static final long serialVersionUID = 1L;
 	
+	private Long id;
 	private String name;
 	private String email;
 	private String phone;
@@ -13,9 +14,19 @@ public class UserDTO implements DTO<User> {
 	}
 
 	public UserDTO(User entity) {
-		name = entity.getName();
-		email = entity.getEmail();
-		phone = entity.getPhone();
+		setId(entity.getId());
+		setName(entity.getName());
+		setEmail(entity.getEmail());
+		setPhone(entity.getPhone());
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public String getName() {
@@ -44,6 +55,6 @@ public class UserDTO implements DTO<User> {
 
 	@Override
 	public User toEntity() {
-		return new User(null, name, email, phone, null);
+		return new User(id, name, email, phone, null);
 	}
 }

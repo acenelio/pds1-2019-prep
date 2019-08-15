@@ -10,7 +10,7 @@ import com.educandoweb.workshop.dto.DTO;
 import com.educandoweb.workshop.entities.DomainEntity;
 import com.educandoweb.workshop.services.generics.CRUDService;
 
-public interface RetrieveResource<E extends DomainEntity<ID, D>, D extends DTO<E>, ID> {
+public interface RetrieveResource<E extends DomainEntity<ID, D>, D extends DTO<E, ID>, ID> {
 
 	CRUDService<E, D, ID> getService();
 

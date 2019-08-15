@@ -2,9 +2,10 @@ package com.educandoweb.workshop.dto;
 
 import com.educandoweb.workshop.entities.Product;
 
-public class ProductDTO implements DTO<Product> {
+public class ProductDTO implements DTO<Product, Long> {
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
 	private String name;
 	private String description;
 	private Double price;
@@ -14,10 +15,20 @@ public class ProductDTO implements DTO<Product> {
 	}
 
 	public ProductDTO(Product entity) {
-		name = entity.getName();
-		description = entity.getDescription();
-		price = entity.getPrice();
-		imgUrl = entity.getImgUrl();
+		setId(entity.getId());
+		setName(entity.getName());
+		setDescription(entity.getDescription());
+		setPrice(entity.getPrice());
+		setImgUrl(entity.getImgUrl());
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public String getName() {
@@ -54,6 +65,6 @@ public class ProductDTO implements DTO<Product> {
 
 	@Override
 	public Product toEntity() {
-		return new Product(null, name, description, price, imgUrl);
+		return new Product(id, name, description, price, imgUrl);
 	}
 }

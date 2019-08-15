@@ -50,7 +50,6 @@ public class Category implements DomainEntity<Long, CategoryDTO> {
 		return id;
 	}
 
-	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

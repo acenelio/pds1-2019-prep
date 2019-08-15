@@ -58,7 +58,6 @@ public class Order implements  DomainEntity<Long, OrderDTO> {
 		return id;
 	}
 
-	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -76,7 +75,9 @@ public class Order implements  DomainEntity<Long, OrderDTO> {
 	}
 
 	public void setOrderStatus(OrderStatus orderStatus) {
-		this.orderStatus = orderStatus.getCode();
+		if (orderStatus != null) {
+			this.orderStatus = orderStatus.getCode();
+		}
 	}
 
 	public User getClient() {

@@ -49,7 +49,6 @@ public class User implements DomainEntity<Long, UserDTO> {
 		return id;
 	}
 
-	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

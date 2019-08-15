@@ -66,7 +66,6 @@ public class Product implements DomainEntity<Long, ProductDTO> {
 		return id;
 	}
 
-	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
