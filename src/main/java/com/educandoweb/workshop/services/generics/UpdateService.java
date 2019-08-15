@@ -11,11 +11,9 @@ public interface UpdateService<E extends DomainEntity<ID, D>, D extends DTO<E>, 
 
 	JpaRepository<E, ID> getRepository();
 	
-	void updateData(E entity, D dto);
-	
 	default D update(ID id, D dto) {
 		E entity = getRepository().findById(id).get();
-		updateData(entity, dto);
+		entity.updateDataFromDTO(dto);
 		entity = getRepository().save(entity);
 		return entity.toDTO();
 	}

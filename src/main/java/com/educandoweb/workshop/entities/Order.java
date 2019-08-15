@@ -139,4 +139,9 @@ public class Order implements  DomainEntity<Long, OrderDTO> {
 	public OrderDTO toDTO() {
 		return new OrderDTO(this);
 	}
+
+	@Override
+	public void updateDataFromDTO(OrderDTO dto) {
+		setOrderStatus(dto.getOrderStatus());
+	}
 }

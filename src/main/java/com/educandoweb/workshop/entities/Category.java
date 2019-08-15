@@ -117,4 +117,9 @@ public class Category implements DomainEntity<Long, CategoryDTO> {
 	public CategoryDTO toDTO() {
 		return new CategoryDTO(this);
 	}
+
+	@Override
+	public void updateDataFromDTO(CategoryDTO dto) {
+		setName(dto.getName());		
+	}
 }

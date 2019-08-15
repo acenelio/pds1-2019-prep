@@ -8,7 +8,6 @@ public class UserDTO implements DTO<User> {
 	private String name;
 	private String email;
 	private String phone;
-	private String password;
 
 	public UserDTO() {
 	}
@@ -17,7 +16,6 @@ public class UserDTO implements DTO<User> {
 		name = entity.getName();
 		email = entity.getEmail();
 		phone = entity.getPhone();
-		password = entity.getPassword();
 	}
 	
 	public String getName() {
@@ -44,16 +42,8 @@ public class UserDTO implements DTO<User> {
 		this.phone = phone;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Override
 	public User toEntity() {
-		return new User(null, name, email, phone, password);
+		return new User(null, name, email, phone, null);
 	}
 }

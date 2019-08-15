@@ -96,4 +96,9 @@ public class Payment implements DomainEntity<Long, PaymentDTO> {
 	public PaymentDTO toDTO() {
 		return new PaymentDTO(this);
 	}
+
+	@Override
+	public void updateDataFromDTO(PaymentDTO dto) {
+		setMoment(dto.getMoment());
+	}
 }

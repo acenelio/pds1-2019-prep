@@ -135,4 +135,12 @@ public class Product implements DomainEntity<Long, ProductDTO> {
 	public ProductDTO toDTO() {
 		return new ProductDTO(this);
 	}
+
+	@Override
+	public void updateDataFromDTO(ProductDTO dto) {
+		setName(dto.getName());
+		setDescription(dto.getDescription());
+		setPrice(dto.getPrice());
+		setImgUrl(dto.getImgUrl());
+	}
 }

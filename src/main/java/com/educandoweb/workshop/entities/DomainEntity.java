@@ -9,4 +9,6 @@ public interface DomainEntity<ID, D> extends Serializable {
 	void setId(ID id);
 	
 	D toDTO();
+	
+	void updateDataFromDTO(D dto);
 }

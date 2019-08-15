@@ -119,4 +119,11 @@ public class User implements DomainEntity<Long, UserDTO> {
 	public UserDTO toDTO() {
 		return new UserDTO(this);
 	}
+
+	@Override
+	public void updateDataFromDTO(UserDTO dto) {
+		setName(dto.getEmail());
+		setEmail(dto.getEmail());
+		setPhone(dto.getPhone());
+	}
 }
