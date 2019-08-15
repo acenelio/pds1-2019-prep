@@ -10,15 +10,18 @@ public class PaymentDTO implements DTO<Payment, Long> {
 
 	private Long id;
 	private Instant moment;
-	private PaymentOrder order;
+	private Long orderId;
 	
 	public PaymentDTO() {
 	}
 	
 	public PaymentDTO(Payment entity) {
+		if (entity.getOrder() == null) {
+			throw new IllegalStateException("Error instantiating PaymentDTO: order was null");
+		}
 		setId(entity.getId());
 		setMoment(entity.getMoment());
-		setOrder(new PaymentOrder(entity.getOrder()));
+		setOrderId(entity.getOrder().getId());
 	}
 	
 	@Override
@@ -38,40 +41,17 @@ public class PaymentDTO implements DTO<Payment, Long> {
 		this.moment = moment;
 	}
 
-	public PaymentOrder getOrder() {
-		return order;
+	public Long getOrderId() {
+		return orderId;
 	}
 
-	public void setOrder(PaymentOrder order) {
-		this.order = order;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 
 	@Override
 	public Payment toEntity() {
-		return new Payment(id, moment, order.toOrder());
-	}
-	
-	class PaymentOrder {
-		
-		private Long id;
-		
-		public PaymentOrder() {
-		}
-		
-		public PaymentOrder(Order order) {
-			setId(order.getId());
-		}
-
-		public Long getId() {
-			return id;
-		}
-
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-		public Order toOrder() {
-			return new Order(id, null, null, null);
-		}
+		Order order = new Order(orderId, null, null, null);
+		return new Payment(id, moment, order);
 	}
 }

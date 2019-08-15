@@ -27,10 +27,9 @@ public class PaymentService implements CRUDService<Payment, PaymentDTO, Long> {
 	
 	@Override
 	public PaymentDTO insert(PaymentDTO dto) {
-		Payment payment = dto.toEntity();
-		Order order = orderRepository.getOne(payment.getOrder().getId());
+		Order order = orderRepository.getOne(dto.getOrderId());
+		Payment payment = new Payment(null, dto.getMoment(), order);
 		order.setPayment(payment);
-		payment.setOrder(order);
 		order = orderRepository.save(order);
 		return order.getPayment().toDTO();
 	}

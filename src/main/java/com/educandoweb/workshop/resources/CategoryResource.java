@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.educandoweb.workshop.dto.CategoryDTO;
 import com.educandoweb.workshop.entities.Category;
 import com.educandoweb.workshop.resources.generics.CRUDResource;
+import com.educandoweb.workshop.services.CategoryService;
 import com.educandoweb.workshop.services.generics.CRUDService;
 
 @RestController
@@ -14,7 +15,7 @@ import com.educandoweb.workshop.services.generics.CRUDService;
 public class CategoryResource implements CRUDResource<Category, CategoryDTO, Long> {
 
 	@Autowired
-	private CRUDService<Category, CategoryDTO, Long> service;
+	private CategoryService service;
 	
 	@Override
 	public CRUDService<Category, CategoryDTO, Long> getService() {

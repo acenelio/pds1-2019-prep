@@ -9,6 +9,7 @@ import com.educandoweb.workshop.entities.User;
 import com.educandoweb.workshop.resources.generics.CreateResource;
 import com.educandoweb.workshop.resources.generics.RetrieveResource;
 import com.educandoweb.workshop.resources.generics.UpdateResource;
+import com.educandoweb.workshop.services.UserService;
 import com.educandoweb.workshop.services.generics.CRUDService;
 
 @RestController
@@ -16,7 +17,7 @@ import com.educandoweb.workshop.services.generics.CRUDService;
 public class UserResource implements CreateResource<User, UserDTO, Long>, RetrieveResource<User, UserDTO, Long>, UpdateResource<User, UserDTO, Long> {
 
 	@Autowired
-	private CRUDService<User, UserDTO, Long> service;
+	private UserService service;
 	
 	@Override
 	public CRUDService<User, UserDTO, Long> getService() {

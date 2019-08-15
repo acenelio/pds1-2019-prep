@@ -8,6 +8,7 @@ import com.educandoweb.workshop.dto.PaymentDTO;
 import com.educandoweb.workshop.entities.Payment;
 import com.educandoweb.workshop.resources.generics.CreateResource;
 import com.educandoweb.workshop.resources.generics.RetrieveResource;
+import com.educandoweb.workshop.services.PaymentService;
 import com.educandoweb.workshop.services.generics.CRUDService;
 
 @RestController
@@ -15,7 +16,7 @@ import com.educandoweb.workshop.services.generics.CRUDService;
 public class PaymentResource implements CreateResource<Payment, PaymentDTO, Long>, RetrieveResource<Payment, PaymentDTO, Long> {
 
 	@Autowired
-	private CRUDService<Payment, PaymentDTO, Long> service;
+	private PaymentService service;
 	
 	@Override
 	public CRUDService<Payment, PaymentDTO, Long> getService() {

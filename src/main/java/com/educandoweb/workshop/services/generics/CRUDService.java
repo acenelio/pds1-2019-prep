@@ -35,7 +35,7 @@ public interface CRUDService<E extends DomainEntity<ID, D>, D extends DTO<E, ID>
 	}
 	
 	default D update(ID id, D dto) {
-		E entity = getRepository().findById(id).get();
+		E entity = getRepository().getOne(id);
 		entity.updateDataFromDTO(dto);
 		entity = getRepository().save(entity);
 		return entity.toDTO();
